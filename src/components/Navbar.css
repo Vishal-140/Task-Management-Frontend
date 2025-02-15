@@ -1,0 +1,19 @@
+.navbar {
+    background-color: royalblue;
+    justify-content: center;
+    padding: 10px 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #f39c12;
+}
