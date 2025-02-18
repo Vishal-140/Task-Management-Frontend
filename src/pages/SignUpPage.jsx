@@ -1,18 +1,53 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import "./SignUpPage.css";
 
 const SignUpPage = () => {
     const [isOtpSent, setIsOtpSent] = useState(false);
     const [email, setEmail] = useState('');
     const [fullName, setFullName] = useState('');
+    const navigate = useNavigate();
 
-    const handleRegister = (e) => {
-        e.preventDefault();
-        // registration logic here
-        
+
+    // Handel registration of user
+    const handleRegister = async (e) => {
+        try {
+            e.preventDefault();
+
+            // check password & confirmPassword is same
+            if (e.target.password.value !== e.target.confirmPassword.value) {
+                alert("Password does not match!");
+                return;
+            }
+
+            const resp = await fetch(import.meta.env.VITE_BACKEND_URL + "/users/register", {  // users/register end point
+                method: "POST",  
+                body: JSON.stringify({
+                    email,
+                    fullName,
+                    otp: e.target.otp.value,
+                    password: e.target.password.value,
+                }),
+                headers: {
+                    "content-type": "application/json",
+                },
+            });
+
+            console.log(resp);
+            const respObj = await resp.json();
+            console.log(respObj);
+            if (respObj.status === "success") {
+                // useNavigate Hook
+                navigate("/login");
+            } else {
+                alert(respObj.message);
+            }
+        } catch (err) {
+            alert(err.message);
+        }
     };
 
+    // Handel OTP
     const handleSendOtp = async (e) => {
         e.preventDefault();
 
