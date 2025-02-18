@@ -1,11 +1,13 @@
+import Navbar from "../components/Navbar";
 
 
-function HomePage() {
+const HomePage = ({ currUser, handleLogout }) => {
     return (
         <div>
-            <h1>Home</h1>
+            <Navbar currUser={currUser} handleLogout={handleLogout} />
+            <h1>Home Page</h1>
         </div>
-    )
-}
+    );
+};
 
 export default HomePage;

@@ -1,19 +1,60 @@
+/* Navbar Container */
 .navbar {
-    background-color: royalblue;
-    justify-content: center;
-    padding: 10px 20px;
+    background-color: #1a1a2e;
+    color: white;
     display: flex;
-    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Greeting Message */
+.navbar span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Navigation Links */
 .nav-link {
     color: white;
     text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 15px;
     transition: color 0.3s ease-in-out;
 }
 
 .nav-link:hover {
     color: #f39c12;
+}
+
+/* Logout Button */
+button {
+    background-color: #e74c3c;
+    border: none;
+    padding: 8px 14px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .nav-link {
+        margin: 5px 0;
+    }
 }
