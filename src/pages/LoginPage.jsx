@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import "./LoginPage.css";
+import "./LoginPage.module.css";
 
 const LoginPage = ({ afterLogin }) => {
     const handleLogin = async (e) => {

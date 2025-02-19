@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import "./SignUpPage.css";
+import "./SignUpPage.module.css";
 
 const SignUpPage = () => {
     const [isOtpSent, setIsOtpSent] = useState(false);
