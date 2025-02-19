@@ -1,3 +1,4 @@
+import './TaskForm.css';
 import PropTypes from "prop-types";
 
 const TaskForm = ({ getData }) => {
@@ -7,12 +8,12 @@ const TaskForm = ({ getData }) => {
             body: JSON.stringify(obj),
             credentials: "include",
             headers: {
-                "content-type": "application/json",
+                "Content-Type": "application/json",
             },
         });
         const respObj = await resp.json();
         if (respObj.status === "success") {
-            console.log("success");
+            console.log("Task added successfully");
             getData();
         } else {
             alert(respObj.message);
@@ -21,45 +22,44 @@ const TaskForm = ({ getData }) => {
 
     const handleAddTask = (e) => {
         e.preventDefault();
-        if (e.target.assignee.value.length > 3) {
-            // console.log(e.target.taskTitle.value);
-            // console.log(e.target[1].value);
-            // console.log(e.target[2].value);
-            // console.log(e.target[3].value);
-            // console.log(e.target.taskTitle.value);
-            // console.log(e.target.assignee.value);
-            // console.log(e.target.deadline.value);
-            // console.log(e.target.priority.value);
-            const dataObj = {
-                taskTitle: e.target.taskTitle.value,
-                assignee: e.target.assignee.value,
-                deadline: e.target.deadline.value,
-                priority: e.target.priority.value,
-                assignor: "Likhilesh",
-            };
 
-            addTask(dataObj);
-        } else {
-            alert("Task Title and assignee is required");
+        const taskTitle = e.target.taskTitle.value.trim();
+        const assignee = e.target.assignee.value.trim();
+        const deadline = e.target.deadline.value;
+        const priority = e.target.priority.value;
+
+        if (!taskTitle || assignee.length < 3) {
+            alert("Task Title and Assignee are required.");
+            return;
         }
+
+        const dataObj = {
+            taskTitle,
+            assignee,
+            deadline,
+            priority,
+            assignor: "Likhilesh",
+        };
+
+        addTask(dataObj);
     };
 
     return (
-        <div>
+        <div className="task-form-container">
             <form onSubmit={handleAddTask}>
-                <div>
+                <div className="form-group">
                     <label>Task Title</label>
-                    <input type="text" name="taskTitle" />
+                    <input type="text" name="taskTitle" required />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Assignee</label>
                     <input type="email" name="assignee" required />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Deadline</label>
                     <input type="datetime-local" name="deadline" />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Priority</label>
                     <select name="priority">
                         <option value="normal">Normal</option>
@@ -68,13 +68,12 @@ const TaskForm = ({ getData }) => {
                         <option value="urgent">Urgent</option>
                     </select>
                 </div>
-                <button>Add Task</button>
+                <button type="submit" className="submit-button">Add Task</button>
             </form>
         </div>
     );
 };
 
-// https://legacy.reactjs.org/docs/typechecking-with-proptypes.html
 TaskForm.propTypes = {
     getData: PropTypes.func.isRequired,
 };

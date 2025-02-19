@@ -1,15 +1,17 @@
 import { Link } from "react-router";
-import "./Navbar.css";
+import styles from "./Navbar.module.css";
 
 const Navbar = ({ currUser, handleLogout }) => {
     return (
-        <nav className="navbar">
-            <span>Hello {currUser.fullName}</span>
-            <Link to="/" className="nav-link">Home</Link>
-            <Link to="/tasks" className="nav-link">Tasks</Link>
-            <Link to="/login" className="nav-link">Login</Link>
-            <Link to="/signup" className="nav-link">SignUp</Link>
-            <button onClick={handleLogout}>Logout</button>
+        <nav className={styles.nav}>
+            <span className={styles.user}>Hello, {currUser?.fullName}</span>
+            <div className={styles.navLinks}>
+                <Link to="/" className={styles.link}>Home</Link>
+                <Link to="/tasks" className={styles.link}>Tasks</Link>
+                <Link to="/login" className={styles.link}>Login</Link>
+                <Link to="/sign-up" className={styles.link}>SignUp</Link>
+                <button className={styles.button} onClick={handleLogout}>Logout</button>
+            </div>
         </nav>
     );
 };

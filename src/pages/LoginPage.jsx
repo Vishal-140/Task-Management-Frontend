@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import "./LoginPage.css";
 
 const LoginPage = ({ afterLogin }) => {
@@ -34,6 +35,7 @@ const LoginPage = ({ afterLogin }) => {
                 <input type="email" placeholder="Email" name="email" required />
                 <input type="password" placeholder="Password" name="password" required />
                 <button type="submit">Login</button>
+            <Link to="/sign-up" className="login-link">SignUp</Link>
             </form>
         </div>
     );
