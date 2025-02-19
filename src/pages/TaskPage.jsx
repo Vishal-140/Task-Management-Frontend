@@ -35,11 +35,11 @@ const TaskPage = () => {
                 <h2 className="page-title">Task Management Tool</h2>
                 <div className="form-container">
                     <TaskForm getData={getData} />
-                    <TaskFilters setFiltersObj={setFiltersObj} />
                 </div>
             </aside>
 
             <main className="main-content">
+                <TaskFilters setFiltersObj={setFiltersObj} />
                 <div className="task-lists-container">
                     <TaskList 
                         list={list} 

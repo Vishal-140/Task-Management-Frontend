@@ -1,5 +1,4 @@
 import React from "react";
-import "./TaskFilters.css";
 
 const TaskFilters = ({ setFiltersObj }) => {
     const handleFilter = (key, value) => {

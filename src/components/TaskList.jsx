@@ -3,165 +3,170 @@ import "./TaskList.css";
 import PropTypes from "prop-types";
 
 const TaskList = ({ list, getData, filterObj, title }) => {
-    const [editTask, setEditTask] = useState(-1);
+    const [editTask, setEditTask] = useState(null);
     const [editObject, setEditObject] = useState({});
 
     const handleEditField = (key, value) => {
-        setEditObject((prev) => {
-            const newObj = { ...prev };
-            newObj[key] = value;
-            return newObj;
-        });
+        setEditObject((prev) => ({
+            ...prev,
+            [key]: value,
+        }));
     };
 
     const handleEditData = async () => {
-        const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/tasks/${editObject._id}`, {
-            method: "PATCH",
-            body: JSON.stringify(editObject),
-            headers: {
-                "content-type": "application/json",
-            },
-        });
-        const respObj = await resp.json();
-        if (respObj.status === "success") {
-            console.log("success :: updated");
-            handleCancel();
-            getData();
-        } else {
-            alert(respObj.message);
+        try {
+            const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/tasks/${editObject._id}`, {
+                method: "PATCH",
+                body: JSON.stringify(editObject),
+                headers: { "content-type": "application/json" },
+            });
+
+            const respObj = await resp.json();
+            if (respObj.status === "success") {
+                console.log("success :: updated");
+                handleCancel();
+                getData();
+            } else {
+                alert(respObj.message);
+            }
+        } catch (error) {
+            console.error("Error updating task:", error);
         }
     };
 
     const handleCancel = () => {
-        setEditTask(-1);
+        setEditTask(null);
         setEditObject({});
     };
 
     const handleDelete = async (taskId) => {
-        const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/tasks/${taskId}`, {
-            method: "DELETE",
-        });
-        console.log("🟡 : resp:", resp);
-        if (resp.status === 204) {
-            console.log("success :: deleted");
-            getData();
-        } else {
-            alert("Error in delete");
+        try {
+            const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/tasks/${taskId}`, {
+                method: "DELETE",
+            });
+
+            if (resp.status === 204) {
+                console.log("success :: deleted");
+                getData();
+            } else {
+                alert("Error in delete");
+            }
+        } catch (error) {
+            console.error("Error deleting task:", error);
         }
     };
-
-    const filteredList = list.filter((elem) => {
-        if (elem.status === filterObj.status) return true;
-        else return false;
-    });
 
     const handleMarkAsDone = async (taskId) => {
-        const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/tasks/${taskId}`, {
-            method: "PATCH",
-            body: JSON.stringify({
-                status: "done",
-            }),
-            headers: {
-                "content-type": "application/json",
-            },
-        });
-        const respObj = await resp.json();
-        if (respObj.status === "success") {
-            console.log("success :: updated");
-            getData();
-        } else {
-            alert(respObj.message);
+        try {
+            const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/tasks/${taskId}`, {
+                method: "PATCH",
+                body: JSON.stringify({ status: "done" }),
+                headers: { "content-type": "application/json" },
+            });
+
+            const respObj = await resp.json();
+            if (respObj.status === "success") {
+                console.log("success :: updated");
+                getData();
+            } else {
+                alert(respObj.message);
+            }
+        } catch (error) {
+            console.error("Error updating task:", error);
         }
     };
+
+    const filteredList = list.filter((elem) => elem.status === filterObj.status);
 
     return (
         <div className="task-list-main">
             <h3 className="task-list-title">{title}</h3>
             <div className="task-list-task-container">
-                {filteredList.map((elem, idx) => {
-                    return (
-                        <div key={elem._id} className="task-card">
-                            <h5>{idx}</h5>
-                            <p>{elem.workTitle}</p>
-                            <p>{elem.taskTitle}</p>
-                            {idx === editTask ? (
-                                <div>
-                                    <label>Assignee</label>
-                                    <input
-                                        value={editObject.assignee}
-                                        onChange={(e) => {
-                                            handleEditField("assignee", e.target.value);
-                                        }}
-                                    />
-                                </div>
+                {filteredList.map((elem, idx) => (
+                    <div key={elem._id} className="task-card">
+                        <h4>#Task {idx + 1}</h4>
+                        <p className="task-title">{elem.workTitle}</p>
+                        <p className="task-title">{elem.taskTitle}</p>
+
+                        <div className="edit-field">
+                            <label>Assignee</label>
+                            {elem._id === editTask ? (
+                                <input
+                                    className="input-field"
+                                    value={editObject?.assignee || ""}
+                                    onChange={(e) => handleEditField("assignee", e.target.value)}
+                                />
                             ) : (
                                 <p>{elem.assignee}</p>
                             )}
+                        </div>
+
+                        <div className="edit-field">
+                            <label>Assignor</label>
                             <p>{elem.assignor}</p>
+                        </div>
+
+                        <div className="edit-field">
+                            <label>Deadline</label>
                             <p>{elem.deadline}</p>
-                            {idx === editTask ? (
-                                <div>
-                                    <label>Priority</label>
-                                    <select
-                                        name="priority"
-                                        value={editObject.priority}
-                                        onChange={(e) => {
-                                            handleEditField("priority", e.target.value);
+                        </div>
+
+                        <div className="edit-field">
+                            <label>Priority</label>
+                            {elem._id === editTask ? (
+                                <select
+                                    className="priority-dropdown"
+                                    name="priority"
+                                    value={editObject?.priority || ""}
+                                    onChange={(e) => handleEditField("priority", e.target.value)}
+                                >
+                                    <option value="normal">Normal</option>
+                                    <option value="low">Low</option>
+                                    <option value="high">High</option>
+                                    <option value="urgent">Urgent</option>
+                                </select>
+                            ) : (
+                                <p className={`priority-badge priority-${elem.priority}`}>{elem.priority}</p>
+                            )}
+                        </div>
+
+                        <p>{elem.status}</p>
+
+                        <div className="task-actions">
+                            {elem._id === editTask ? (
+                                <>
+                                    <button className="btn-submit" onClick={handleEditData}>Submit Changes</button>
+                                    <button className="btn-cancel" onClick={handleCancel}>Cancel</button>
+                                </>
+                            ) : (
+                                <>
+                                    <button
+                                        className="btn-edit"
+                                        onClick={() => {
+                                            setEditObject(elem);
+                                            setEditTask(elem._id);
                                         }}
                                     >
-                                        <option value="normal">Normal</option>
-                                        <option value="low">Low</option>
-                                        <option value="high">High</option>
-                                        <option value="urgent">Urgent</option>
-                                    </select>
-                                    
-                                </div>
-                            ) : (
-                                <p>{elem.priority}</p>
+                                        Edit
+                                    </button>
+                                    <button className="btn-delete" onClick={() => handleDelete(elem._id)}>Delete</button>
+                                    <button className="btn-done" onClick={() => handleMarkAsDone(elem._id)}>Mark as Done</button>
+                                </>
                             )}
-
-                            <p>{elem.status}</p>
-                            {idx === editTask ? (
-                                <div>
-                                    <button onClick={handleEditData}>Submit Changes</button>
-                                    <button onClick={handleCancel}>Cancel</button>
-                                </div>
-                            ) : (
-                                <button
-                                    onClick={() => {
-                                        setEditObject(elem);
-                                        setEditTask(idx);
-                                    }}
-                                >
-                                    Edit
-                                </button>
-                            )}
-
-                            <button
-                                onClick={() => {
-                                    handleDelete(elem._id);
-                                }}
-                            >
-                                Delete
-                            </button>
-                            <button
-                                onClick={() => {
-                                    handleMarkAsDone(elem._id);
-                                }}
-                            >
-                                Mark as Done
-                            </button>
                         </div>
-                    );
-                })}
+                    </div>
+                ))}
             </div>
         </div>
     );
 };
 
+// PropTypes validation
 TaskList.propTypes = {
-    list: PropTypes.array,
-    getData: PropTypes.func,
+    list: PropTypes.array.isRequired,
+    getData: PropTypes.func.isRequired,
+    filterObj: PropTypes.object.isRequired,
+    title: PropTypes.string.isRequired,
 };
 
 export default TaskList;
