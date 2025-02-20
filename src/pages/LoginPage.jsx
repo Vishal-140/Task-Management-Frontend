@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import styles from "./LoginPage.module.css";
+import PropTypes from 'prop-types';
 
 const LoginPage = ({ afterLogin }) => {
     const handleLogin = async (e) => {
@@ -39,5 +40,10 @@ const LoginPage = ({ afterLogin }) => {
         </div>
     );
 };
+
+LoginPage.propTypes = {
+    afterLogin: PropTypes.func,
+};
+
 
 export default LoginPage;
