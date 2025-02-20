@@ -7,9 +7,10 @@ import "./TaskPage.css";
 import PropTypes from 'prop-types';
 
 const TaskPage = ({ currUser, handleLogout }) => {
-    const [list, setList] = useState([]); 
+    const [list, setList] = useState([]);
     const [filtersObj, setFiltersObj] = useState({
-        priority: "",
+        priority: "", 
+        status: "todo"
     });
 
     const getData = async () => {
@@ -53,13 +54,13 @@ const TaskPage = ({ currUser, handleLogout }) => {
                     <TaskList 
                         list={list} 
                         getData={getData} 
-                        filterObj={{ status: "todo" }} 
+                        filterObj={{ ...filtersObj, status: "todo" }} 
                         title="Todo List" 
                     />
                     <TaskList 
                         list={list} 
                         getData={getData} 
-                        filterObj={{ status: "done" }} 
+                        filterObj={{ ...filtersObj, status: "done" }} 
                         title="Done List" 
                     />
                 </div>

@@ -80,12 +80,15 @@ const TaskList = ({ list, getData, filterObj, title }) => {
     };
 
     const filteredList = list.filter((elem) => {
-        return (
-            elem.status === filterObj.status && 
-            (filterObj.priority ? elem.priority === filterObj.priority : true)
-        );
+        // First check status
+        const statusMatch = elem.status === filterObj.status;
+        
+        // Then check priority if it's set
+        const priorityMatch = !filterObj.priority || elem.priority === filterObj.priority;
+        
+        // Return true only if both conditions are met
+        return statusMatch && priorityMatch;
     });
-    
 
     return (
         <div className="task-list-main">

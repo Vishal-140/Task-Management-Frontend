@@ -1,0 +1,31 @@
+.filters-container {
+    background: #2d2d2d;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.filter-group label {
+    color: #e0e0e0;
+    font-weight: 500;
+}
+
+.filter-select {
+    padding: 0.5rem;
+    border-radius: 4px;
+    background: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid #404040;
+    min-width: 150px;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #4a9eff;
+}

@@ -1,25 +1,24 @@
 import PropTypes from "prop-types";
+import "./TaskFilters.css";
 
 const TaskFilters = ({ setFiltersObj }) => {
-
     const handleFilter = (key, value) => {
-        setFiltersObj((prev) => {
-            const newObj = { ...prev };
-            newObj[key] = value;
-            return newObj;
-        });
+        setFiltersObj((prev) => ({
+            ...prev,
+            [key]: value
+        }));
     };
+
     return (
-        <div>
-            <div>
-                <label>Filter by Priority</label>
+        <div className="filters-container">
+            <div className="filter-group">
+                <label>Filter by Priority:</label>
                 <select
                     name="priority"
-                    onChange={(e) => {
-                        handleFilter("priority", e.target.value);
-                    }}
+                    onChange={(e) => handleFilter("priority", e.target.value)}
+                    className="filter-select"
                 >
-                    <option value="">--Select--</option>
+                    <option value="">All Priorities</option>
                     <option value="normal">Normal</option>
                     <option value="low">Low</option>
                     <option value="high">High</option>
@@ -29,7 +28,6 @@ const TaskFilters = ({ setFiltersObj }) => {
         </div>
     );
 };
-
 
 TaskFilters.propTypes = {
     setFiltersObj: PropTypes.func.isRequired,
