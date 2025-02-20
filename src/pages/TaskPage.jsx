@@ -12,6 +12,7 @@ const TaskPage = ({ currUser, handleLogout }) => {
         priority: "", 
         status: "todo"
     });
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const getData = async () => {
         const query = [];
@@ -20,9 +21,7 @@ const TaskPage = ({ currUser, handleLogout }) => {
         }
         console.log(query);
         const resp = await fetch(
-            `
-            ${import.meta.env.VITE_BACKEND_URL}/tasks?${query}
-        `,
+            `${import.meta.env.VITE_BACKEND_URL}/tasks?${query}`,
             {
                 credentials: "include",
             }
@@ -34,42 +33,48 @@ const TaskPage = ({ currUser, handleLogout }) => {
 
     useEffect(() => {
         getData();
-        
     }, [filtersObj]);
 
     return (
         <>
-        <Navbar currUser={currUser} handleLogout={handleLogout} />
-        <div className="task-page">
-            <aside className="sidebar">
-                <h2 className="page-title">Task Management Tool</h2>
-                <div className="form-container">
-                    <TaskForm getData={getData} />
-                </div>
-            </aside>
+            <Navbar currUser={currUser} handleLogout={handleLogout} />
+            
+            <div className="task-page">
+                <button className="toggle-btn" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                    {isSidebarOpen ? "Close Form" : "Add New Task"}
+                </button>
 
-            <main className="main-content">
-                <TaskFilters setFiltersObj={setFiltersObj} />
-                <div className="task-lists-container">
-                    <TaskList 
-                        list={list} 
-                        getData={getData} 
-                        filterObj={{ ...filtersObj, status: "todo" }} 
-                        title="Todo List" 
-                    />
-                    <TaskList 
-                        list={list} 
-                        getData={getData} 
-                        filterObj={{ ...filtersObj, status: "done" }} 
-                        title="Done List" 
-                    />
-                </div>
-            </main>
-        </div>
+                <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+                    <div className="form-container">
+                        <TaskForm getData={getData} />
+                    </div>
+                </aside>
+
+                <main className={`main-content ${isSidebarOpen ? "" : "full-width"}`}>
+                    <TaskFilters setFiltersObj={setFiltersObj} />
+                    <div className="task-lists-container">
+                        <div className="todo-list">
+                            <TaskList 
+                                list={list} 
+                                getData={getData} 
+                                filterObj={{ ...filtersObj, status: "todo" }} 
+                                title="Todo List" 
+                            />
+                        </div>
+                        <div className="done-list">
+                            <TaskList 
+                                list={list} 
+                                getData={getData} 
+                                filterObj={{ ...filtersObj, status: "done" }} 
+                                title="Done List" 
+                            />
+                        </div>
+                    </div>
+                </main>
+            </div>
         </>
     );
 };
-
 
 TaskPage.propTypes = {
     currUser: PropTypes.object,

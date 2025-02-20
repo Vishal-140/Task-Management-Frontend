@@ -21,7 +21,7 @@
     display: block;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: #000000;
+    color: #ffffff;
     font-size: 0.95rem;
 }
 
@@ -33,7 +33,7 @@
     border-radius: 8px;
     font-size: 1rem;
     transition: border-color 0.2s ease;
-    background-color: #8d8d8d;
+    background-color: #505050;
     color: #ffffff;
 }
 
