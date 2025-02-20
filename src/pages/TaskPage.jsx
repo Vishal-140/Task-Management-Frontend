@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import TaskForm from "../components/TaskForm";
 import TaskFilters from "../components/TaskFilters";
 import TaskList from "../components/TaskList";
+import Navbar from "../components/Navbar";
 import "./TaskPage.css";
+import PropTypes from 'prop-types';
 
-const TaskPage = () => {
-    const [list, setList] = useState([]);
+const TaskPage = ({ currUser, handleLogout }) => {
+    const [list, setList] = useState([]); 
     const [filtersObj, setFiltersObj] = useState({
         priority: "",
     });
@@ -15,21 +17,28 @@ const TaskPage = () => {
         if (filtersObj.priority) {
             query.push(`priority=${filtersObj.priority}`);
         }
+        console.log(query);
         const resp = await fetch(
-            `${import.meta.env.VITE_BACKEND_URL}/tasks?${query}`,
+            `
+            ${import.meta.env.VITE_BACKEND_URL}/tasks?${query}
+        `,
             {
                 credentials: "include",
             }
-        );
+        ); 
         const respBody = await resp.json();
-        setList(respBody.data.tasks);
+        const arrayOfTaskList = respBody.data.tasks;
+        setList(arrayOfTaskList);
     };
 
     useEffect(() => {
         getData();
+        
     }, [filtersObj]);
 
     return (
+        <>
+        <Navbar currUser={currUser} handleLogout={handleLogout} />
         <div className="task-page">
             <aside className="sidebar">
                 <h2 className="page-title">Task Management Tool</h2>
@@ -56,7 +65,14 @@ const TaskPage = () => {
                 </div>
             </main>
         </div>
+        </>
     );
+};
+
+
+TaskPage.propTypes = {
+    currUser: PropTypes.object,
+    handleLogout: PropTypes.func.isRequired,
 };
 
 export default TaskPage;

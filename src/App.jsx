@@ -108,6 +108,17 @@ function App() {
                         }
                     />
                     <Route
+                        path="/tasks"
+                        element={
+                            currUser.isLoggedIn ? (
+                                <TaskPage currUser={currUser} handleLogout={handleLogout} />
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    
+                    <Route
                         path="/login"
                         element={currUser.isLoggedIn ? <Navigate to="/" /> : <LoginPage afterLogin={afterLogin} />}
                     />

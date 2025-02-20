@@ -79,7 +79,13 @@ const TaskList = ({ list, getData, filterObj, title }) => {
         }
     };
 
-    const filteredList = list.filter((elem) => elem.status === filterObj.status);
+    const filteredList = list.filter((elem) => {
+        return (
+            elem.status === filterObj.status && 
+            (filterObj.priority ? elem.priority === filterObj.priority : true)
+        );
+    });
+    
 
     return (
         <div className="task-list-main">
@@ -164,7 +170,6 @@ const TaskList = ({ list, getData, filterObj, title }) => {
     );
 };
 
-// PropTypes validation
 TaskList.propTypes = {
     list: PropTypes.array.isRequired,
     getData: PropTypes.func.isRequired,

@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import styles from "./Navbar.module.css";
+import PropTypes from "prop-types";
 
 const Navbar = ({ currUser, handleLogout }) => {
     return (
@@ -14,6 +15,12 @@ const Navbar = ({ currUser, handleLogout }) => {
             </div>
         </nav>
     );
+};
+
+Navbar.propTypes = {
+    currUser: PropTypes.object.isRequired,
+    handleLogout: PropTypes.func.isRequired,
+    
 };
 
 export default Navbar;
