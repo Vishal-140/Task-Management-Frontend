@@ -17,6 +17,7 @@ const TaskList = ({ list, getData, filterObj, title }) => {
         try {
             const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/tasks/${editObject._id}`, {
                 method: "PATCH",
+                credentials: "include",
                 body: JSON.stringify(editObject),
                 headers: { "content-type": "application/json" },
             });
@@ -43,6 +44,7 @@ const TaskList = ({ list, getData, filterObj, title }) => {
         try {
             const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/tasks/${taskId}`, {
                 method: "DELETE",
+                credentials: "include",
             });
 
             if (resp.status === 204) {
@@ -60,6 +62,7 @@ const TaskList = ({ list, getData, filterObj, title }) => {
         try {
             const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/tasks/${taskId}`, {
                 method: "PATCH",
+                credentials: "include",
                 body: JSON.stringify({ status: "done" }),
                 headers: { "content-type": "application/json" },
             });
