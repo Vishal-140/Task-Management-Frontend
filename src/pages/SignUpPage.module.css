@@ -4,14 +4,14 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: #333;
 }
 
 .form {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    background: #fff;
+    background: #212121;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -19,7 +19,8 @@
 }
 
 h1{
-    color: black;
+    color: white;
+    padding-bottom: 14px;
 }
 
 .input {
@@ -32,13 +33,13 @@ h1{
 }
 
 .input:focus {
-    border-color: #007bff;
+    border-color: #00ff0d;
 }
 
 .button {
     padding: 10px;
     font-size: 1rem;
-    background-color: #007bff;
+    background-color: #02571a;
     color: white;
     border: none;
     border-radius: 5px;
@@ -47,13 +48,13 @@ h1{
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #017c24;
 }
 
 .loginLink {
     margin-top: 10px;
     text-align: center;
-    color: #007bff;
+    color: royalblue;
     text-decoration: none;
     font-size: 0.9rem;
 }
