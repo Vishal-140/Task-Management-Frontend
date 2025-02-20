@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import "./LoginPage.module.css";
+import styles from "./LoginPage.module.css";
 
 const LoginPage = ({ afterLogin }) => {
     const handleLogin = async (e) => {
@@ -25,17 +25,16 @@ const LoginPage = ({ afterLogin }) => {
         } else {
             alert(respObj.message);
         }
-
     };
 
     return (
-        <div className="login-container">
-            <h1>Login Page</h1>
-            <form onSubmit={handleLogin}>
-                <input type="email" placeholder="Email" name="email" required />
-                <input type="password" placeholder="Password" name="password" required />
-                <button type="submit">Login</button>
-            <Link to="/sign-up" className="login-link">SignUp</Link>
+        <div className={styles.container}>
+            <h1 className={styles.title}>Login Page</h1>
+            <form onSubmit={handleLogin} className={styles.form}>
+                <input type="email" placeholder="Email" name="email" required className={styles.input} />
+                <input type="password" placeholder="Password" name="password" required className={styles.input} />
+                <button type="submit" className={styles.button}>Login</button>
+                <Link to="/sign-up" className={styles.signupLink}>Sign Up</Link>
             </form>
         </div>
     );
