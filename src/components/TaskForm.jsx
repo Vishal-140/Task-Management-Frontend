@@ -15,12 +15,14 @@ const TaskForm = ({ getData }) => {
         if (respObj.status === "success") {
             console.log("Task added successfully");
             getData();
+            return true; // Return true on success
         } else {
             alert(respObj.message);
+            return false; // Return false on failure
         }
     };
 
-    const handleAddTask = (e) => {
+    const handleAddTask = async (e) => {
         e.preventDefault();
 
         const taskTitle = e.target.taskTitle.value.trim();
@@ -41,7 +43,10 @@ const TaskForm = ({ getData }) => {
             assignor: "Likhilesh",
         };
 
-        addTask(dataObj);
+        const success = await addTask(dataObj);
+        if (success) {
+            e.target.reset(); // Reset the form on successful submission
+        }
     };
 
     return (
