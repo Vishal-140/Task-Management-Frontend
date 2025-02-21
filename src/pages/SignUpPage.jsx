@@ -75,24 +75,51 @@ const SignUpPage = () => {
 
     return (
         <div className={styles.container}>
-            <h1>SignUp Page</h1>
-            {isOtpSent ? (
-                <form onSubmit={handleRegister} className={styles.form}>
-                    <input type="text" value={email} readOnly className={styles.input} />
-                    <input type="text" value={fullName} readOnly className={styles.input} />
-                    <input type="text" placeholder="OTP" name="otp" required className={styles.input} />
-                    <input type="password" placeholder="Password" name="password" required className={styles.input} />
-                    <input type="password" placeholder="Confirm Password" name="confirmPassword" required className={styles.input} />
-                    <button type="submit" className={styles.button}>Register</button>
-                </form>
-            ) : (
-                <form onSubmit={handleSendOtp} className={styles.form}>
-                    <input type="text" placeholder="Full Name" name="fullName" required className={styles.input} />
-                    <input type="email" placeholder="Email" name="userEmail" required className={styles.input} />
-                    <button type="submit" className={styles.button}>Send OTP</button>
-                </form>
-            )}
-            <Link to="/login" className={styles.loginLink}>Login</Link>
+            <div className={styles.formWrapper}>
+                <h1 className={styles.title}>Create Account</h1>
+                {isOtpSent ? (
+                    <>
+                        <form onSubmit={handleRegister} className={styles.form}>
+                            <div className={styles.inputGroup}>
+                                <label className={styles.label}>Email</label>
+                                <input type="text" value={email} readOnly className={styles.input} />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <label className={styles.label}>Full Name</label>
+                                <input type="text" value={fullName} readOnly className={styles.input} />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <label className={styles.label}>OTP</label>
+                                <input type="text" placeholder="Enter OTP" name="otp" required className={styles.input} />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <label className={styles.label}>Password</label>
+                                <input type="password" placeholder="Create password" name="password" required className={styles.input} />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <label className={styles.label}>Confirm Password</label>
+                                <input type="password" placeholder="Confirm password" name="confirmPassword" required className={styles.input} />
+                            </div>
+                            <button type="submit" className={styles.button}>Create Account</button>
+                        </form>
+                    </>
+                ) : (
+                    <>
+                        <form onSubmit={handleSendOtp} className={styles.form}>
+                            <div className={styles.inputGroup}>
+                                <label className={styles.label}>Full Name</label>
+                                <input type="text" placeholder="Enter your full name" name="fullName" required className={styles.input} />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <label className={styles.label}>Email</label>
+                                <input type="email" placeholder="Enter your email" name="userEmail" required className={styles.input} />
+                            </div>
+                            <button type="submit" className={styles.button}>Send OTP</button>
+                        </form>
+                    </>
+                )}
+                <Link to="/login" className={styles.loginLink}>Already have an account? <span>Login</span></Link>
+            </div>
         </div>
     );
 };

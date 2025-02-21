@@ -30,13 +30,33 @@ const LoginPage = ({ afterLogin }) => {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Login Page</h1>
-            <form onSubmit={handleLogin} className={styles.form}>
-                <input type="email" placeholder="Email" name="email" required className={styles.input} />
-                <input type="password" placeholder="Password" name="password" required className={styles.input} />
-                <button type="submit" className={styles.button}>Login</button>
-                <Link to="/sign-up" className={styles.signupLink}>Sign Up</Link>
-            </form>
+            <div className={styles.formWrapper}>
+                <h1 className={styles.title}>Welcome back</h1>
+                <form onSubmit={handleLogin} className={styles.form}>
+                    <div className={styles.inputGroup}>
+                        <label className={styles.label}>Email</label>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            name="email"
+                            required
+                            className={styles.input}
+                        />
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label className={styles.label}>Password</label>
+                        <input
+                            type="password"
+                            placeholder="Enter your password"
+                            name="password"
+                            required
+                            className={styles.input}
+                        />
+                    </div>
+                    <button type="submit" className={styles.button}>Sign in</button>
+                    <Link to="/sign-up" className={styles.signupLink}>Don&apos;t have an account? <span>Sign up</span></Link>
+                </form>
+            </div>
         </div>
     );
 };
