@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import { useEffect, useState } from 'react';
 import TaskPage from './pages/TaskPage';
+import AskAi from './pages/AskAi';
 
 function App() {
     const [currUser, setCurrUser] = useState(() => {
@@ -117,6 +118,16 @@ function App() {
                             )
                         }
                     />
+                    <Route
+                        path="/ask-ai"
+                        element={
+                            currUser.isLoggedIn ? (
+                                <AskAi currUser={currUser} handleLogout={handleLogout} />
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
                     
                     <Route
                         path="/login"
@@ -124,12 +135,11 @@ function App() {
                     />
                     <Route path="/sign-up" element={currUser.isLoggedIn ? <Navigate to="/" /> : <SignUpPage />} />
                     <Route path="/tasks" element={currUser.isLoggedIn ? <TaskPage /> : <Navigate to="/login" />} />
-                    <Route
-                        path="*"
-                        element={
-                            <div>
-                                Page not found <Link to="/">Home</Link>
-                            </div>
+                    <Route path="/ask-ai" element={currUser.isLoggedIn ? <AskAi /> : <Navigate to="/login" />} />
+                    <Route path="*" element={
+                        <div>
+                            Page not found <Link to="/">Home</Link>
+                        </div>
                         }
                     />
                 </Routes>

@@ -9,6 +9,7 @@ const Navbar = ({ currUser, handleLogout }) => {
             <div className={styles.navLinks}>
                 <Link to="/" className={styles.link}>Home</Link>
                 <Link to="/tasks" className={styles.link}>Tasks</Link>
+                <Link to="/ask-ai" className={styles.link}>Ask AI</Link>
                 <Link to="/login" className={styles.link}>Login</Link>
                 <Link to="/sign-up" className={styles.link}>SignUp</Link>
                 <button className={styles.button} onClick={handleLogout}>Logout</button>
