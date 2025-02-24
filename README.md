@@ -1,6 +1,6 @@
 # Task Management Frontend
 
-[https://task--management--live.vercel.app/](https://task--management--live.vercel.app/)  
+[https://task--management--live.vercel.app](https://task--management--live.vercel.app)  
 
 This is the frontend of the Task Management application, built using React (Vite). The application allows users to manage tasks efficiently with AI-based query handling, providing intelligent responses based on stored tasks.
 
@@ -31,3 +31,8 @@ This project works alongside the [https://github.com/Vishal-140/Task-Management-
 - Secure authentication with OTP verification
 - Real-time task updates using a responsive UI
 - Fast and lightweight frontend built with Vite
+
+
+## Note
+
+The backend is deployed on Render's free service, so processing may be a little slow.
