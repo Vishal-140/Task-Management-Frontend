@@ -1,5 +1,5 @@
 .container {
-    background-color: #1e1e1e;
+    background-color: #121212;
     color: #ffffff;
     min-height: 100vh;
     display: flex;
@@ -9,77 +9,109 @@
 }
 
 .title {
-    font-size: 24px;
-    margin-top: 60px;
-    margin-bottom: 50px;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 20px;
     text-align: center;
 }
 
 .layout {
     display: flex;
-    width: 80%;
-    max-width: 900px;
-    gap: 20px;
+    flex-direction: column;
+    width: 90%;
+    max-width: 600px;
+    gap: 10px;
+    background: #1e1e1e;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    height: 70vh;
+    overflow-y: auto;
+    position: relative;
 }
 
-.inputBox {
+.responseBox {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-.textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #444;
-    background-color: #2a2a2a;
-    color: white;
-    resize: none;
-}
-
-.button {
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: #37a169;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.button:disabled {
-    background-color: royalblue;
-    cursor: not-allowed;
-}
-
-.button:hover:not(:disabled) {
-    background-color: #107a42;
-}
-
-.responseBox {
-    flex: 2;
-    padding: 15px;
-    border-radius: 5px;
-    background-color: #2a2a2a;
-    border: 1px solid #444;
-    min-height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
+    padding-bottom: 60px; 
     overflow-y: auto;
 }
 
 .responseContent {
-    width: 100%;
+    background: #2a2a2a;
+    padding: 10px 15px;
+    border-radius: 8px;
+    max-width: 80%;
+    align-self: flex-start;
+    word-wrap: break-word;
+    font-size: 15px;
+    line-height: 1.5;
 }
 
-.error {
-    color: red;
-    margin-top: 10px;
+.inputBox {
+    position: fixed;
+    bottom: 0;
+    width: 90%;
+    max-width: 600px;
+    background: #1e1e1e;
+    padding: 10px;
+    border-top: 1px solid #333;
+    display: flex;
+    gap: 10px;
+}
+
+.textarea {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #2a2a2a;
+    color: white;
+    resize: none;
+    outline: none;
+}
+
+.button {
+    padding: 12px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #37a169;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background-color: #2e8547;
+}
+
+@media (max-width: 768px) {
+    .layout {
+        width: 95%;
+        height: 70vh;
+    }
+
+    .inputBox {
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    .textarea {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .responseContent {
+        font-size: 14px;
+    }
 }
