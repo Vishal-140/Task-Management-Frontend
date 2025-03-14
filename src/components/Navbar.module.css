@@ -3,39 +3,36 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 2rem;
-    background-color: #424242;
-    color: white;
+    background-color: var(--card-bg);
+    color: var(--text-primary);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-.user {
-    font-size: 1rem;
-    color: white;
-    font-weight: 500;
-}
-
-/* Navbar links container */
 .navLinks {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
-/* Hidden menu for mobile */
+.user {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
 .menuToggle {
     display: none;
     font-size: 1.8rem;
     cursor: pointer;
-    color: white;
+    color: var(--text-primary);
 }
 
-/* Links */
 .link {
     text-decoration: none;
-    color: white;
+    color: var(--text-body);
     padding: 0.5rem 1rem;
     margin: 0 0.5rem;
     border-radius: 0.375rem;
@@ -44,32 +41,30 @@
 }
 
 .link:hover {
-    background-color: #d7d7d7;
-    color: #1F2937;
+    background-color: var(--card-border);
+    color: var(--text-primary);
 }
 
 .button {
-    background-color: #EF4444;
-    color: white;
+    background-color: var(--btn-delete);
+    color: var(--text-primary);
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 0.375rem;
     cursor: pointer;
     font-weight: 500;
-    transition: background-color 0.2s ease;
+    transition: all 0.3s ease;
     white-space: nowrap;
 }
 
 .button:hover {
-    background-color: #DC2626;
+    background-color: var(--btn-delete-hover);
+    transform: translateY(-2px);
 }
+
 @media (max-width: 768px) {
     .nav {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem;
-        height: auto;
-        justify-content: flex-start;
+        padding: 0.5rem 1rem;
         position: relative;
     }
 
@@ -83,13 +78,14 @@
 
     .navLinks {
         display: none;
-        flex-direction: column;
-        width: 100%;
         position: absolute;
         top: 100%;
         left: 0;
-        background-color: #424242;
-        padding: 0.75rem 1rem;
+        right: 0;
+        flex-direction: column;
+        background-color: var(--card-bg);
+        padding: 1rem;
+        border-top: 1px solid var(--card-border);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
@@ -100,12 +96,16 @@
     .link {
         width: 100%;
         text-align: center;
+        margin: 0.5rem 0;
         padding: 0.75rem;
     }
 
     .button {
         width: 100%;
-        text-align: center;
         margin-top: 0.5rem;
+    }
+
+    .user {
+        font-size: 0.9rem;
     }
 }

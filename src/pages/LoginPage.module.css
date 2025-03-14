@@ -4,20 +4,21 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #212121;
+    background-color: var(--background);
     padding: 20px;
 }
 
 .formWrapper {
-    background-color: #2D2D2D;
+    background-color: var(--card-bg);
     padding: 40px;
     border-radius: 12px;
     width: 100%;
     max-width: 420px;
+    border: 1px solid var(--card-border);
 }
 
 .title {
-    color: white;
+    color: var(--text-primary);
     text-align: center;
     font-size: 28px;
     margin-bottom: 24px;
@@ -36,48 +37,49 @@
 }
 
 .label {
-    color: #a0a3bd;
+    color: var(--text-muted);
     font-size: 14px;
 }
 
 .input {
     padding: 12px 16px;
     border-radius: 8px;
-    border: 1px solid #2e354d;
-    background-color: #414141;
-    color: white;
+    border: 1px solid var(--card-border);
+    background-color: var(--background);
+    color: var(--text-primary);
     font-size: 16px;
     width: 100%;
-    transition: border-color 0.2s;
+    transition: all 0.2s ease;
 }
 
 .input:focus {
     outline: none;
-    border-color: royalblue;
+    border-color: var(--btn-edit);
 }
 
 .input::placeholder {
-    color: #6b7280;
+    color: var(--text-muted);
 }
 
 .button {
     padding: 12px;
     border-radius: 8px;
     border: none;
-    background: linear-gradient(to right, #e67e22, #f39c12);
-    color: white;
+    background: var(--btn-edit);
+    color: var(--text-primary);
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: all 0.3s ease;
 }
 
 .button:hover {
-    opacity: 0.9;
+    background: var(--btn-edit-hover);
+    transform: translateY(-2px);
 }
 
 .signupLink {
-    color: #f39c12;
+    color: var(--btn-edit);
     text-decoration: none;
     text-align: center;
     display: block;
@@ -86,11 +88,11 @@
 }
 
 .signupLink:hover {
-    text-decoration: underline;
+    color: var(--btn-edit-hover);
 }
 
-.signupLink>span {
-    color: rgb(194, 42, 42);
+.signupLink > span {
+    color: var(--btn-delete);
     font-size: 15px;
     font-weight: bold;
 }
@@ -100,8 +102,8 @@
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(9, 157, 31, 0.8);
-    color: white;
+    background-color: var(--priority-low);
+    color: var(--text-primary);
     padding: 12px 24px;
     border-radius: 4px;
     z-index: 1000;

@@ -2,30 +2,31 @@
   display: flex;
   width: 100%;
   height: 100vh;
-  background-color: #212121;
+  background-color: var(--background);
   overflow: hidden;
   position: relative;
 }
 
 .sidebar {
   position: absolute;
-  left: -400px; /* Initially hidden */
+  left: -400px;
   width: 350px;
   height: 100%;
-  background-color: #333;
-  color: white;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
   transition: left 0.4s ease-in-out;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  border-right: 1px solid var(--card-border);
   z-index: 10;
 }
 
 .sidebar.open {
-  left: 0; /* Slide in */
+  left: 0;
 }
 
 .page-title {
-  color: white;
+  color: var(--text-primary);
   text-align: center;
 }
 
@@ -55,15 +56,15 @@
 .todo-list, .done-list {
   flex: 1;
   width: 50%;
-  background: #424242;
+  background: var(--card-bg);
   padding: 15px;
   border-radius: 8px;
-  color: white;
-  overflow-y: auto; /* Enables vertical scrolling */
+  color: var(--text-primary);
+  overflow-y: auto;
   max-height: calc(100vh - 200px);
+  border: 1px solid var(--card-border);
 }
 
-/* Scrollbar styling */
 .todo-list::-webkit-scrollbar,
 .done-list::-webkit-scrollbar {
   width: 8px;
@@ -71,36 +72,35 @@
 
 .todo-list::-webkit-scrollbar-thumb,
 .done-list::-webkit-scrollbar-thumb {
-  background: #555;
+  background: var(--card-border);
   border-radius: 4px;
 }
 
 .todo-list::-webkit-scrollbar-track,
 .done-list::-webkit-scrollbar-track {
-  background: #333;
+  background: var(--card-bg);
 }
 
-/* Button to toggle sidebar */
 .toggle-btn {
   position: absolute;
   top: 33px;
   left: 150px;
-  background-color: #1A1A1A;
+  background-color: var(--btn-edit);
   border: none;
   padding: 10px 15px;
   cursor: pointer;
-  color: white;
+  color: var(--text-primary);
   font-size: 16px;
   border-radius: 5px;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
   z-index: 20;
 }
 
 .toggle-btn:hover {
-  background-color: #2C5281;
+  background-color: var(--btn-edit-hover);
+  transform: translateY(-2px);
 }
 
-/* Override TaskList.css styles */
 .todo-list .task-list-main, 
 .done-list .task-list-main {
   background-color: transparent;

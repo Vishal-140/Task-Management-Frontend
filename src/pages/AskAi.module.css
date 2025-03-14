@@ -1,104 +1,136 @@
 .container {
-    background-color: #121212;
-    color: #ffffff;
+    background-color: var(--background);
+    color: var(--text-primary);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 0;
 }
 
 .title {
     font-size: 28px;
     font-weight: bold;
-    margin-top: 20px;
+    margin: 20px 0;
     text-align: center;
+    color: var(--text-primary);
 }
 
 .layout {
     display: flex;
     flex-direction: column;
-    width: 90%;
-    max-width: 600px;
-    gap: 10px;
-    background: #1e1e1e;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    height: 70vh;
-    overflow-y: auto;
+    width: 100%;
+    max-width: 900px;
+    background: var(--background);
+    min-height: calc(100vh - 80px);
     position: relative;
+    margin: 0 auto;
 }
 
 .responseBox {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding-bottom: 60px; 
+    gap: 20px;
+    padding: 20px 10% 120px;
     overflow-y: auto;
 }
 
+.responseBox:empty {
+    border: 2px dashed var(--card-border);
+    border-radius: 12px;
+    margin: 20px 10%;
+    height: 100px;
+}
+
 .responseContent {
-    background: #2a2a2a;
-    padding: 10px 15px;
-    border-radius: 8px;
-    max-width: 80%;
-    align-self: flex-start;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 100%;
+    width: 100%;
     word-wrap: break-word;
-    font-size: 15px;
-    line-height: 1.5;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-body);
+    border: 1px solid var(--card-border);
 }
 
 .inputBox {
     position: fixed;
     bottom: 0;
-    width: 90%;
-    max-width: 600px;
-    background: #1e1e1e;
-    padding: 10px;
-    border-top: 1px solid #333;
+    left: 0;
+    width: 100%;
+    background: var(--background);
+    padding: 10px 2%;
     display: flex;
-    gap: 10px;
+    justify-content: center;
+    gap: 15px;
+    border-top: 1px solid var(--card-border);
 }
 
 .textarea {
-    flex: 1;
-    padding: 12px;
+    max-width: 800px;
+    width: 100%;
+    padding: 16px;
     font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #444;
-    background-color: #2a2a2a;
-    color: white;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    background-color: var(--card-bg);
+    color: var(--text-primary);
     resize: none;
     outline: none;
+    min-height: 52px;
+    max-height: 200px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.textarea:focus {
+    border-color: var(--btn-edit);
 }
 
 .button {
-    padding: 12px 16px;
+    padding: 16px;
     font-size: 16px;
     border: none;
     border-radius: 8px;
-    background-color: #37a169;
-    color: white;
+    background-color: var(--btn-edit);
+    color: var(--text-primary);
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    height: 52px;
+    min-width: 80px;
 }
 
 .button:hover {
-    background-color: #2e8547;
+    background-color: var(--btn-edit-hover);
+    transform: translateY(-1px);
 }
 
 @media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
     .layout {
         width: 95%;
         height: 70vh;
+        min-height: auto;
+        border-radius: 10px;
+        border: 1px solid var(--card-border);
+        background: var(--card-bg);
+    }
+
+    .responseBox {
+        padding: 10px;
     }
 
     .inputBox {
+        position: absolute;
         width: 100%;
-        left: 0;
-        right: 0;
+        padding: 10px;
+        background: var(--card-bg);
+        border-radius: 0 0 10px 10px;
     }
 
     .textarea {
@@ -109,9 +141,16 @@
     .button {
         font-size: 14px;
         padding: 10px;
+        height: 42px;
     }
 
     .responseContent {
         font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    .responseBox:empty {
+        margin: 10px;
+        height: 80px;
     }
 }

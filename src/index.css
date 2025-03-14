@@ -5,7 +5,35 @@
     font-family: 'Inter', sans-serif;
 }
 
+:root {
+    /* Primary Colors */
+    --background: #1E1E2F;
+    --card-bg: #252538;
+    --card-border: #3A3A5A;
+    
+    /* Text Colors */
+    --text-primary: #FFFFFF;
+    --text-body: #D1D1E0;
+    --text-muted: #A0A0B5;
+    
+    /* Priority Colors */
+    --priority-low: #4CAF50;
+    --priority-normal: #2D9CDB;
+    --priority-high: #E2B93B;
+    --priority-urgent: #E63946;
+    
+    /* Button Colors */
+    --btn-edit: #5E60CE;
+    --btn-edit-hover: #4A4DBA;
+    --btn-delete: #E63946;
+    --btn-delete-hover: #C32F3A;
+    --btn-done: #27AE60;
+    --btn-done-hover: #219150;
+    --btn-add: #FFD700;
+    --btn-add-hover: #E6C200;
+}
+
 body {
-    background-color: #2b2a2a;
-    color: white;
+    background-color: var(--background);
+    color: var(--text-body);
 }
