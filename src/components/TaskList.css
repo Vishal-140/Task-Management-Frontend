@@ -5,16 +5,32 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border: 1px solid var(--card-border);
     width: 100%;
-    min-width: 1200px;
+}
+
+.task-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.task-content {
+    min-width: 1170px;
+    width: max-content;
+}
+
+.task-header {
+    background: var(--background);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .task-header-row {
     display: grid;
-    grid-template-columns: 60px 200px 200px 250px 200px 180px 20px;
+    grid-template-columns: 60px 180px 200px 250px 180px 100px 200px;
     gap: 24px;
     align-items: center;
     padding: 1.2rem;
-    background: var(--background);
     border-bottom: 1px solid var(--card-border);
     color: var(--text-muted);
     font-weight: 500;
@@ -32,6 +48,99 @@
     margin-bottom: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+.task-scroll-container {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+}
+
+@media screen and (max-width: 768px) {
+    .task-list-main {
+        padding: 0.5rem;
+    }
+
+    .task-header {
+        display: none;
+    }
+
+    .task-container {
+        width: 100%;
+        overflow-x: visible;
+    }
+
+    .task-content {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .task-card {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 1rem;
+        min-width: auto;
+        grid-template-columns: none;
+    }
+
+    .task-card > div {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .task-card > div::before {
+        content: attr(data-label);
+        min-width: 80px;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-align: right;
+        padding-right: 12px;
+    }
+
+    .task-card > div[data-label="Title"]::before {
+        display: none;
+    }
+
+    .task-card > div[data-label="Title"] {
+        padding: 0 0 12px 0;
+        font-size: 1.25rem;
+        font-weight: 700;
+        border-bottom: 1px solid var(--card-border);
+        margin-bottom: 8px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .task-title-cell {
+        font-size: 1.25rem;
+        font-weight: 700;
+        max-width: none;
+        flex: 1;
+        text-align: center;
+    }
+
+    .deadline-cell {
+        font-size: 0.9rem;
+    }
+
+    .task-actions {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .priority-badge {
+        padding: 4px 12px;
+        font-size: 0.7rem;
+    }
+
+    .task-scroll-container {
+        margin-top: 0.5rem;
+        padding: 0;
+    }
 }
 
 .task-card.expanded {
