@@ -198,6 +198,36 @@
 
 .btn-done {
     background-color: var(--btn-done, #52c41a);
+    font-weight: 600;
+}
+
+.btn-done:hover {
+    background-color: var(--btn-done-hover, #389e0d);
+}
+
+.btn-cancel {
+    background-color: var(--btn-delete, #ff4d4f);
+    font-weight: 600;
+}
+
+.btn-cancel:hover {
+    background-color: var(--btn-delete-hover, #cf1322);
+}
+
+.task-actions .btn-submit,
+.task-actions .btn-cancel {
+    padding: 6px 16px;
+    font-size: 0.8rem;
+    min-width: 70px;
+}
+
+@media screen and (max-width: 768px) {
+    .task-actions .btn-submit,
+    .task-actions .btn-cancel {
+        width: 100%;
+        padding: 8px 16px;
+        margin-top: 4px;
+    }
 }
 
 .task-actions button:hover {
@@ -255,4 +285,63 @@
     white-space: pre-line;
     line-height: 1.2;
     min-width: 180px;
+}
+
+/* Edit mode input styles */
+.edit-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid var(--btn-edit);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.edit-input:focus {
+    outline: none;
+    border-color: var(--btn-edit-hover);
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* Style select dropdown in edit mode */
+.edit-input[type="datetime-local"],
+select.edit-input {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    padding-right: 32px;
+}
+
+/* Mobile responsiveness for edit inputs */
+@media screen and (max-width: 768px) {
+    .edit-input {
+        padding: 10px;
+        font-size: 1rem;
+    }
+    
+    .task-card > div .edit-input {
+        width: calc(100% - 100px); /* Account for label width */
+    }
+}
+
+/* Edit mode input styles */
+.edit-input[type="datetime-local"] {
+    cursor: pointer;
+    appearance: none;
+    padding: 8px 12px;
+    background-image: none;
+}
+
+.btn-submit {
+    background-color: var(--btn-done, #52c41a);
+    font-weight: 600;
+}
+
+.btn-submit:hover {
+    background-color: var(--btn-done-hover, #389e0d);
 }
