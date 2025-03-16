@@ -13,6 +13,7 @@ const TaskPage = ({ currUser, handleLogout }) => {
         status: "todo"
     });
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [activeList, setActiveList] = useState("todo");
 
     const getData = async () => {
         const query = [];
@@ -38,7 +39,6 @@ const TaskPage = ({ currUser, handleLogout }) => {
     return (
         <>
             <Navbar currUser={currUser} handleLogout={handleLogout} />
-            
             <div className="task-page">
                 <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
                     <div className="form-container">
@@ -52,23 +52,37 @@ const TaskPage = ({ currUser, handleLogout }) => {
                         isSidebarOpen={isSidebarOpen}
                         setIsSidebarOpen={setIsSidebarOpen}
                     />
+                    <div className="list-navigation">
+                        <button 
+                            className={`nav-btn ${activeList === "todo" ? "active" : ""}`}
+                            onClick={() => setActiveList("todo")}
+                        >
+                            Todo List
+                        </button>
+                        <button 
+                            className={`nav-btn ${activeList === "done" ? "active" : ""}`}
+                            onClick={() => setActiveList("done")}
+                        >
+                            Done List
+                        </button>
+                    </div>
                     <div className="task-lists-container">
-                        <div className="todo-list">
+                        {activeList === "todo" && (
                             <TaskList 
                                 list={list} 
                                 getData={getData} 
                                 filterObj={{ ...filtersObj, status: "todo" }} 
                                 title="Todo List" 
                             />
-                        </div>
-                        <div className="done-list">
+                        )}
+                        {activeList === "done" && (
                             <TaskList 
                                 list={list} 
                                 getData={getData} 
                                 filterObj={{ ...filtersObj, status: "done" }} 
                                 title="Done List" 
                             />
-                        </div>
+                        )}
                     </div>
                 </main>
             </div>

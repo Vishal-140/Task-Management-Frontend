@@ -2,9 +2,10 @@ import { useState } from "react";
 import "./TaskList.css";
 import PropTypes from "prop-types";
 
-const TaskList = ({ list, getData, filterObj, title }) => {
+const TaskList = ({ list, getData, filterObj }) => {
     const [editTask, setEditTask] = useState(null);
     const [editObject, setEditObject] = useState({});
+    const [expandedCard, setExpandedCard] = useState(null);
 
     const handleEditField = (key, value) => {
         setEditObject((prev) => ({
@@ -83,89 +84,106 @@ const TaskList = ({ list, getData, filterObj, title }) => {
         // First check status
         const statusMatch = elem.status === filterObj.status;
         
-        // Then check priority if it's set
+        // Then check priority if its set
         const priorityMatch = !filterObj.priority || elem.priority === filterObj.priority;
         
         // Return true only if both conditions are met
         return statusMatch && priorityMatch;
     });
 
+    const handleCardClick = (id) => {
+        setExpandedCard(expandedCard === id ? null : id);
+    };
+
     return (
         <div className="task-list-main">
-            <h3 className="task-list-title">{title}</h3>
-            <div className="task-list-task-container">
+            <div className="task-header">
+                <div className="task-header-row">
+                    <div>Task Number</div>
+                    <div>Task Title</div>
+                    <div>Assignee</div>
+                    <div>Assignor</div>
+                    <div>Deadline</div>
+                    <div>Priority</div>
+                    <div>Actions</div>
+                </div>
+            </div>
+            <div className="task-scroll-container">
                 {filteredList.map((elem, idx) => (
-                    <div key={elem._id} className="task-card">
-                        <h4>#Task {idx + 1}</h4>
-                        <p className="task-title">{elem.workTitle}</p>
-                        <p className="task-title">{elem.taskTitle}</p>
-
-                        <div className="edit-field">
-                            <label>Assignee</label>
-                            {elem._id === editTask ? (
-                                <input
-                                    className="input-field"
-                                    value={editObject?.assignee || ""}
-                                    onChange={(e) => handleEditField("assignee", e.target.value)}
-                                />
-                            ) : (
-                                <p>{elem.assignee}</p>
-                            )}
-                        </div>
-
-                        <div className="edit-field">
-                            <label>Assignor</label>
-                            <p>{elem.assignor}</p>
-                        </div>
-
-                        <div className="edit-field">
-                            <label>Deadline</label>
-                            <p>{elem.deadline}</p>
-                        </div>
-
-                        <div className="edit-field">
-                            <label>Priority</label>
-                            {elem._id === editTask ? (
-                                <select
-                                    className="priority-dropdown"
-                                    name="priority"
-                                    value={editObject?.priority || ""}
-                                    onChange={(e) => handleEditField("priority", e.target.value)}
-                                >
-                                    <option value="normal">Normal</option>
-                                    <option value="low">Low</option>
-                                    <option value="high">High</option>
-                                    <option value="urgent">Urgent</option>
-                                </select>
-                            ) : (
-                                <p className={`priority-badge priority-${elem.priority}`}>{elem.priority}</p>
-                            )}
-                        </div>
-
-                        <p>{elem.status}</p>
-
-                        <div className="task-actions">
-                            {elem._id === editTask ? (
-                                <>
-                                    <button className="btn-submit" onClick={handleEditData}>Submit Changes</button>
-                                    <button className="btn-cancel" onClick={handleCancel}>Cancel</button>
-                                </>
-                            ) : (
-                                <>
-                                    <button
-                                        className="btn-edit"
-                                        onClick={() => {
-                                            setEditObject(elem);
-                                            setEditTask(elem._id);
-                                        }}
+                    <div 
+                        key={elem._id} 
+                        className={`task-card ${expandedCard === elem._id ? 'expanded' : ''}`}
+                        onClick={() => handleCardClick(elem._id)}
+                    >
+                        <div>#{idx + 1}</div>
+                        <div className="task-title-cell">{elem.taskTitle}</div>
+                        {elem._id === editTask ? (
+                            <>
+                                <div>
+                                    <input
+                                        type="text"
+                                        value={editObject.assignee || ""}
+                                        onChange={(e) => handleEditField("assignee", e.target.value)}
+                                        className="edit-input"
+                                    />
+                                </div>
+                                <div>{elem.assignor}</div>
+                                <div>
+                                    <input
+                                        type="datetime-local"
+                                        value={editObject.deadline?.slice(0, 16) || ""}
+                                        onChange={(e) => handleEditField("deadline", e.target.value)}
+                                        className="edit-input"
+                                    />
+                                </div>
+                                <div>
+                                    <select
+                                        value={editObject.priority || ""}
+                                        onChange={(e) => handleEditField("priority", e.target.value)}
+                                        className="edit-input"
                                     >
-                                        Edit
-                                    </button>
+                                        <option value="low">Low</option>
+                                        <option value="normal">Normal</option>
+                                        <option value="high">High</option>
+                                        <option value="urgent">Urgent</option>
+                                    </select>
+                                </div>
+                                <div className="task-actions">
+                                    <button className="btn-submit" onClick={handleEditData}>Save</button>
+                                    <button className="btn-cancel" onClick={handleCancel}>Cancel</button>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div>{elem.assignee}</div>
+                                <div>{elem.assignor}</div>
+                                <div className="deadline-cell">
+                                    {new Date(elem.deadline).toLocaleString('en-US', {
+                                        year: 'numeric',
+                                        month: '2-digit',
+                                        day: '2-digit',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: true
+                                    }).replace(',', '\n')}
+                                </div>
+                                <div>
+                                    <span className={`priority-badge priority-${elem.priority}`}>
+                                        {elem.priority}
+                                    </span>
+                                </div>
+                                <div className="task-actions">
+                                    <button className="btn-edit" onClick={() => {
+                                        setEditObject(elem);
+                                        setEditTask(elem._id);
+                                    }}>Edit</button>
                                     <button className="btn-delete" onClick={() => handleDelete(elem._id)}>Delete</button>
-                                    <button className="btn-done" onClick={() => handleMarkAsDone(elem._id)}>Mark as Done</button>
-                                </>
-                            )}
-                        </div>
+                                    {filterObj.status === "todo" && (
+                                        <button className="btn-done" onClick={() => handleMarkAsDone(elem._id)}>Done</button>
+                                    )}
+                                </div>
+                            </>
+                        )}
                     </div>
                 ))}
             </div>

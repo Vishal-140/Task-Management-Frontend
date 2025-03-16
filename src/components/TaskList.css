@@ -1,174 +1,149 @@
 .task-list-main {
-    padding: 2rem;
+    padding: 1rem;
     background-color: var(--card-bg);
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border: 1px solid var(--card-border);
+    width: 100%;
+    min-width: 1200px;
 }
 
-.task-list-title {
-    color: var(--text-primary);
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--card-border);
-}
-
-.task-list-task-container {
+.task-header-row {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: 60px 200px 200px 250px 200px 180px 20px;
+    gap: 24px;
+    align-items: center;
+    padding: 1.2rem;
+    background: var(--background);
+    border-bottom: 1px solid var(--card-border);
+    color: var(--text-muted);
+    font-weight: 500;
 }
 
 .task-card {
+    display: grid;
+    grid-template-columns: 60px 180px 200px 250px 180px 100px 200px;
+    gap: 24px;
+    align-items: center;
+    padding: 1.2rem;
     background-color: var(--background);
-    padding: 1.5rem;
     border-radius: 8px;
     border: 1px solid var(--card-border);
-    transition: all 0.2s ease;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.task-card.expanded {
+    height: auto;
+    grid-template-rows: auto;
+}
+
+.task-card.expanded > div {
+    white-space: normal;
+    overflow: visible;
+    word-wrap: break-word;
+}
+
+.task-card > div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease;
 }
 
 .task-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    background-color: var(--card-bg);
     border-color: var(--btn-edit);
-}
-
-.task-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.task-header h4 {
-    color: var(--text-primary);
-    margin: 0;
-    font-size: 1.2rem;
-}
-
-.task-content {
-    flex: 1;
-}
-
-.task-title {
-    font-size: 1.5rem;
-    color: var(--text-body);
-    margin-bottom: 1rem;
-}
-
-.priority-badge {
-    display: inline-block;
-    padding: 0.3rem 0.8rem;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-transform: uppercase;
-}
-
-.priority-urgent {
-    background-color: var(--priority-urgent);
-    color: var(--text-primary);
-}
-
-.priority-high {
-    background-color: var(--priority-high);
-    color: var(--text-primary);
-}
-
-.priority-normal {
-    background-color: var(--priority-normal);
-    color: var(--text-primary);
-}
-
-.priority-low {
-    background-color: var(--priority-low);
-    color: var(--text-primary);
-}
-
-.edit-field {
-    margin: 1rem 0;
-}
-
-.edit-field label {
-    display: block;
-    color: var(--text-muted);
-    margin-bottom: 0.3rem;
-    font-size: 0.9rem;
-}
-
-.edit-field input,
-.edit-field select {
-    width: 100%;
-    padding: 0.5rem;
-    background-color: var(--background);
-    border: 1px solid var(--card-border);
-    border-radius: 4px;
-    color: var(--text-primary);
-    font-size: 0.9rem;
-}
-
-.edit-field input:focus,
-.edit-field select:focus {
-    outline: none;
-    border-color: var(--btn-edit);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .task-actions {
     display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .task-actions button {
-    padding: 0.6rem 1rem;
+    padding: 6px 12px;
     border: none;
     border-radius: 4px;
-    color: var(--text-primary);
+    font-size: 0.75rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    flex: 1;
-    min-width: fit-content;
+    color: white;
+    min-width: 60px;
+    height: 28px;
+    line-height: 1;
+    transition: all 0.2s ease;
 }
 
 .btn-edit {
-    background-color: var(--btn-edit);
-}
-
-.btn-edit:hover {
-    background-color: var(--btn-edit-hover);
+    background-color: var(--btn-edit, #1890ff);
 }
 
 .btn-delete {
-    background-color: var(--btn-delete);
-}
-
-.btn-delete:hover {
-    background-color: var(--btn-delete-hover);
+    background-color: var(--btn-delete, #ff4d4f);
 }
 
 .btn-done {
-    background-color: var(--btn-done);
+    background-color: var(--btn-done, #52c41a);
 }
 
-.btn-done:hover {
-    background-color: var(--btn-done-hover);
+.task-actions button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
 }
 
-.btn-submit {
-    background-color: var(--btn-edit);
+.priority-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 90px;
+    letter-spacing: 0.5px;
 }
 
-.btn-submit:hover {
-    background-color: var(--btn-edit-hover);
+.priority-urgent {
+    background-color: #ff4d4f;
+    color: white;
 }
 
-.btn-cancel {
-    background-color: var(--card-border);
+.priority-high {
+    background-color: #ff7a45;
+    color: white;
 }
 
-.btn-cancel:hover {
-    background-color: var(--card-bg);
+.priority-normal {
+    background-color: #36cfc9;
+    color: white;
+}
+
+.priority-low {
+    background-color: #73d13d;
+    color: white;
+}
+
+.task-scroll-container {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+}
+
+.task-title-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.deadline-cell {
+    white-space: pre-line;
+    line-height: 1.2;
+    min-width: 180px;
 }
