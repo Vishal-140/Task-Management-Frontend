@@ -89,14 +89,13 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-
     .menuToggle {
         display: block;
     }
 
     .navLinks {
         position: absolute;
-        top: -200px; /* Start from above the viewport */
+        top: -200px;
         left: 0;
         right: 0;
         flex-direction: row;
@@ -111,7 +110,7 @@
     }
 
     .navLinks.active {
-        top: 100%; /* Slide down below navbar */
+        top: 100%;
     }
 
     .link {
@@ -122,13 +121,5 @@
 
     .button {
         width: auto;
-    }
-}
-
-/* Additional mobile adjustments */
-@media screen and (max-width: 480px) {
-    .navLinks {
-        flex-wrap: wrap;
-        gap: 1rem;
     }
 }
