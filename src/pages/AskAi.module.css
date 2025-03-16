@@ -1,105 +1,58 @@
 .container {
-    background-color: var(--background);
-    color: var(--text-primary);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    min-height: calc(100vh - 60px);
 }
 
 .title {
-    font-size: 28px;
-    font-weight: bold;
-    margin: 20px 0;
     text-align: center;
     color: var(--text-primary);
+    font-size: 2rem;
+    margin-bottom: 2rem;
 }
 
 .layout {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 900px;
-    background: var(--background);
-    min-height: calc(100vh - 80px);
-    position: relative;
-    margin: 0 auto;
-}
-
-.responseBox {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px 10% 120px;
-    overflow-y: auto;
-}
-
-.responseBox:empty {
-    border: 2px dashed var(--card-border);
-    border-radius: 12px;
-    margin: 20px 10%;
-    height: 100px;
-}
-
-.responseContent {
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 12px;
-    max-width: 100%;
-    width: 100%;
-    word-wrap: break-word;
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--text-body);
-    border: 1px solid var(--card-border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 .inputBox {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: var(--background);
-    padding: 10px 2%;
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    border-top: 1px solid var(--card-border);
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .textarea {
-    max-width: 800px;
     width: 100%;
-    padding: 16px;
-    font-size: 16px;
-    border-radius: 12px;
+    min-height: 150px;
+    padding: 1rem;
     border: 1px solid var(--card-border);
+    border-radius: 8px;
     background-color: var(--card-bg);
     color: var(--text-primary);
-    resize: none;
-    outline: none;
-    min-height: 52px;
-    max-height: 200px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.3s ease;
 }
 
 .textarea:focus {
+    outline: none;
     border-color: var(--btn-edit);
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
 }
 
 .button {
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
     background-color: var(--btn-edit);
-    color: var(--text-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    height: 52px;
-    min-width: 80px;
 }
 
 .button:hover {
@@ -107,50 +60,85 @@
     transform: translateY(-1px);
 }
 
-@media (max-width: 768px) {
+.button:disabled {
+    background-color: var(--text-muted);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.responseBox {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    min-height: 200px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.responseContent {
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.responseContent strong {
+    display: block;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.responseContent pre {
+    font-family: inherit;
+    margin: 0;
+}
+
+.error {
+    color: var(--btn-delete);
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+
+@media screen and (max-width: 768px) {
+    .footerWrapper {
+        display: none;
+    }
+
     .container {
-        padding: 20px;
+        margin: 1rem auto;
+        position: relative;
+        padding-bottom: 80px;
     }
 
     .layout {
-        width: 95%;
-        height: 70vh;
-        min-height: auto;
-        border-radius: 10px;
-        border: 1px solid var(--card-border);
-        background: var(--card-bg);
-    }
-
-    .responseBox {
-        padding: 10px;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
     }
 
     .inputBox {
-        position: absolute;
-        width: 100%;
-        padding: 10px;
-        background: var(--card-bg);
-        border-radius: 0 0 10px 10px;
+        order: 2;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: var(--background);
+        padding: 1rem;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 100;
     }
 
     .textarea {
-        font-size: 14px;
-        padding: 10px;
+        min-height: 50px;
+        max-height: 100px;
     }
 
-    .button {
-        font-size: 14px;
-        padding: 10px;
-        height: 42px;
-    }
-
-    .responseContent {
-        font-size: 14px;
-        padding: 10px 15px;
-    }
-
-    .responseBox:empty {
-        margin: 10px;
-        height: 80px;
+    .responseBox {
+        order: -1;
+        margin-bottom: 1rem;
     }
 }

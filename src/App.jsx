@@ -5,6 +5,7 @@ import SignUpPage from './pages/SignUpPage';
 import { useEffect, useState } from 'react';
 import TaskPage from './pages/TaskPage';
 import AskAi from './pages/AskAi';
+import Footer from "./components/Footer";
 
 function App() {
     const [currUser, setCurrUser] = useState(() => {

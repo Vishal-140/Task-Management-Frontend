@@ -3,6 +3,7 @@ import TaskForm from "../components/TaskForm";
 import TaskFilters from "../components/TaskFilters";
 import TaskList from "../components/TaskList";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./TaskPage.css";
 import PropTypes from 'prop-types';
 
@@ -20,7 +21,6 @@ const TaskPage = ({ currUser, handleLogout }) => {
         if (filtersObj.priority) {
             query.push(`priority=${filtersObj.priority}`);
         }
-        console.log(query);
         const resp = await fetch(
             `${import.meta.env.VITE_BACKEND_URL}/tasks?${query}`,
             {
@@ -37,7 +37,7 @@ const TaskPage = ({ currUser, handleLogout }) => {
     }, [filtersObj]);
 
     return (
-        <>
+        <div className="task-page-wrapper">
             <Navbar currUser={currUser} handleLogout={handleLogout} />
             <div className="task-page">
                 <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
@@ -86,7 +86,8 @@ const TaskPage = ({ currUser, handleLogout }) => {
                     </div>
                 </main>
             </div>
-        </>
+            <Footer />
+        </div>
     );
 };
 

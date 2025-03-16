@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./AskAi.module.css";
 import PropTypes from "prop-types";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const AskAi = ({ currUser, handleLogout }) => {
     const [query, setQuery] = useState("");
@@ -74,6 +75,9 @@ const AskAi = ({ currUser, handleLogout }) => {
                 </div>
 
                 {error && <p className={styles.error}>{error}</p>}
+            </div>
+            <div className={styles.footerWrapper}>
+                <Footer />
             </div>
         </>
     );

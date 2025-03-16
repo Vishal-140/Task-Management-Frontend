@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import { Link } from "react-router";
 import "./HomePage.css";
 import PropTypes from 'prop-types';
+import Footer from "../components/Footer";
 
 const HomePage = ({ currUser, handleLogout }) => {
     return (
@@ -28,14 +29,7 @@ const HomePage = ({ currUser, handleLogout }) => {
                     </div>
                 </div>
             </div>
-            <footer className="home-footer">
-                <p>&copy; {new Date().getFullYear()} Task Management Tool. All rights reserved.</p>
-                <div className="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Contact Us</a>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 };
