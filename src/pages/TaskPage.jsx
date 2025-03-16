@@ -40,10 +40,6 @@ const TaskPage = ({ currUser, handleLogout }) => {
             <Navbar currUser={currUser} handleLogout={handleLogout} />
             
             <div className="task-page">
-                <button className="toggle-btn" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-                    {isSidebarOpen ? "Close Form" : "Add New Task"}
-                </button>
-
                 <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
                     <div className="form-container">
                         <TaskForm getData={getData} />
@@ -51,7 +47,11 @@ const TaskPage = ({ currUser, handleLogout }) => {
                 </aside>
 
                 <main className={`main-content ${isSidebarOpen ? "" : "full-width"}`}>
-                    <TaskFilters setFiltersObj={setFiltersObj} />
+                    <TaskFilters 
+                        setFiltersObj={setFiltersObj}
+                        isSidebarOpen={isSidebarOpen}
+                        setIsSidebarOpen={setIsSidebarOpen}
+                    />
                     <div className="task-lists-container">
                         <div className="todo-list">
                             <TaskList 

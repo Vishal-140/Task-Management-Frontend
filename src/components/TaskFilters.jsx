@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import "./TaskFilters.css";
 
-const TaskFilters = ({ setFiltersObj }) => {
+const TaskFilters = ({ setFiltersObj, isSidebarOpen, setIsSidebarOpen }) => {
     const handleFilter = (key, value) => {
         setFiltersObj((prev) => ({
             ...prev,
@@ -11,6 +11,9 @@ const TaskFilters = ({ setFiltersObj }) => {
 
     return (
         <div className="filters-container">
+            <button className="add-task-btn" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                {isSidebarOpen ? "Close Form" : "Add New Task"}
+            </button>
             <div className="filter-group">
                 <label>Filter by Priority:</label>
                 <select
@@ -31,6 +34,8 @@ const TaskFilters = ({ setFiltersObj }) => {
 
 TaskFilters.propTypes = {
     setFiltersObj: PropTypes.func.isRequired,
+    isSidebarOpen: PropTypes.bool.isRequired,
+    setIsSidebarOpen: PropTypes.func.isRequired,
 };
 
 export default TaskFilters;

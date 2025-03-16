@@ -81,26 +81,6 @@
   background: var(--card-bg);
 }
 
-.toggle-btn {
-  position: absolute;
-  top: 33px;
-  left: 150px;
-  background-color: var(--btn-edit);
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  color: var(--text-primary);
-  font-size: 16px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-  z-index: 20;
-}
-
-.toggle-btn:hover {
-  background-color: var(--btn-edit-hover);
-  transform: translateY(-2px);
-}
-
 .todo-list .task-list-main, 
 .done-list .task-list-main {
   background-color: transparent;

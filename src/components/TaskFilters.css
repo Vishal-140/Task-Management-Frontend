@@ -4,8 +4,44 @@
     border-radius: 8px;
     margin-bottom: 2rem;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     border: 1px solid var(--card-border);
+    position: relative;
+}
+
+.toggle-btn {
+    background-color: var(--btn-edit);
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 16px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    z-index: 20;
+}
+
+.toggle-btn:hover {
+    background-color: var(--btn-edit-hover);
+    transform: translateY(-2px);
+}
+
+.add-task-btn {
+    background-color: var(--btn-edit);
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 16px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.add-task-btn:hover {
+    background-color: var(--btn-edit-hover);
+    transform: translateY(-2px);
 }
 
 .filter-group {
@@ -31,4 +67,20 @@
 .filter-select:focus {
     outline: none;
     border-color: var(--btn-edit);
+}
+
+@media (max-width: 768px) {
+    .filters-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .add-task-btn {
+        width: 100%;
+    }
+
+    .filter-group {
+        width: 100%;
+        justify-content: space-between;
+    }
 }
