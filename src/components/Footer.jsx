@@ -19,7 +19,7 @@ const Footer = () => {
                 <div className="footer-section">
                     <h4>Contact</h4>
                     <ul>
-                        <li>Email: support@taskmanagementtool.com</li>
+                        <li>Email: support@gmail.com</li>
                         <li>Phone: +1234567890</li>
                     </ul>
                 </div>
